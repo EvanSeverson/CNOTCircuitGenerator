@@ -1,0 +1,265 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9075,        257]
+NotebookOptionsPosition[      8545,        234]
+NotebookOutlinePosition[      8880,        249]
+CellTagsIndexPosition[      8837,        246]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TwoLevelDecompose", "::", "usage"}], "=", 
+  "\"\<Decomposes a unitary matrix m into the product of two level matrices\>\
+\""}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TwoLevelDecompose", "[", 
+   RowBox[{"m_", "?", "UnitaryMatrixQ"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"ConjugateTranspose", "/@", 
+     RowBox[{"TwoLevelDecompose", "[", 
+      RowBox[{"m", ",", "1", ",", "2"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TwoLevelDecompose", "[", 
+   RowBox[{
+    RowBox[{"m_", "?", "SquareMatrixQ"}], ",", "x_Integer", ",", 
+    "y_Integer"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"l", "=", 
+       RowBox[{"Length", "[", "m", "]"}]}], ",", "m2", ",", "a", ",", "b", 
+      ",", "r"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"x", "\[GreaterEqual]", "l"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Return", "[", 
+         RowBox[{"{", "}"}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"y", " ", ">", " ", "l"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Return", "[", 
+         RowBox[{"TwoLevelDecompose", "[", 
+          RowBox[{"m", ",", 
+           RowBox[{"x", "+", "1"}], ",", 
+           RowBox[{"x", "+", "2"}]}], "]"}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"x", "\[Equal]", 
+        RowBox[{"l", "-", "1"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"m2", "=", 
+         RowBox[{"IdentityMatrix", "[", "l", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"m2", "[", 
+          RowBox[{"[", 
+           RowBox[{"x", ",", "x"}], "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"m", "[", 
+           RowBox[{"[", 
+            RowBox[{"x", ",", "x"}], "]"}], "]"}], "\[Conjugate]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"m2", "[", 
+          RowBox[{"[", 
+           RowBox[{"y", ",", "y"}], "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"m", "[", 
+           RowBox[{"[", 
+            RowBox[{"y", ",", "y"}], "]"}], "]"}], "\[Conjugate]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"m2", "[", 
+          RowBox[{"[", 
+           RowBox[{"x", ",", "y"}], "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"m", "[", 
+           RowBox[{"[", 
+            RowBox[{"y", ",", "x"}], "]"}], "]"}], "\[Conjugate]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"m2", "[", 
+          RowBox[{"[", 
+           RowBox[{"y", ",", "x"}], "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"m", "[", 
+           RowBox[{"[", 
+            RowBox[{"x", ",", "y"}], "]"}], "]"}], "\[Conjugate]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"{", "m2", "}"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"m2", "=", 
+      RowBox[{"IdentityMatrix", "[", "l", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"a", "=", 
+      RowBox[{"m", "[", 
+       RowBox[{"[", 
+        RowBox[{"x", ",", "x"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"b", "=", 
+      RowBox[{"m", "[", 
+       RowBox[{"[", 
+        RowBox[{"y", ",", "x"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"r", "=", 
+      SqrtBox[
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Abs", "[", "a", "]"}], "2"], "+", 
+        SuperscriptBox[
+         RowBox[{"Abs", "[", "b", "]"}], "2"]}]]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"a", "/=", "r"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"b", "/=", "r"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m2", "[", 
+       RowBox[{"[", 
+        RowBox[{"x", ",", "x"}], "]"}], "]"}], "=", 
+      RowBox[{"a", "\[Conjugate]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m2", "[", 
+       RowBox[{"[", 
+        RowBox[{"x", ",", "y"}], "]"}], "]"}], "=", 
+      RowBox[{"b", "\[Conjugate]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m2", "[", 
+       RowBox[{"[", 
+        RowBox[{"y", ",", "x"}], "]"}], "]"}], "=", "b"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"m2", "[", 
+       RowBox[{"[", 
+        RowBox[{"y", ",", "y"}], "]"}], "]"}], "=", 
+      RowBox[{"-", "a"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Prepend", "[", 
+      RowBox[{
+       RowBox[{"TwoLevelDecompose", "[", 
+        RowBox[{
+         RowBox[{"m2", ".", "m"}], ",", "x", ",", 
+         RowBox[{"y", "+", "1"}]}], "]"}], ",", "m2"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.731774361299262*^9, 3.7317744217984467`*^9}, {
+   3.731775063573*^9, 3.731775146605969*^9}, {3.731775208334406*^9, 
+   3.731775218534534*^9}, {3.731775291799571*^9, 3.731775346439872*^9}, {
+   3.731775384808209*^9, 3.731775506841638*^9}, 3.731780184576582*^9, {
+   3.7317802146967993`*^9, 3.731780361466454*^9}, {3.7317803990188627`*^9, 
+   3.731780507028245*^9}, {3.731780546236785*^9, 3.731780684022303*^9}, {
+   3.731780836783926*^9, 3.731780866216281*^9}, {3.7317810943385572`*^9, 
+   3.731781095058264*^9}, {3.7317811251708612`*^9, 3.7317811396348677`*^9}, {
+   3.7317817608808727`*^9, 3.73178182951371*^9}, {3.731781867490139*^9, 
+   3.731781971043215*^9}, {3.73178210555649*^9, 3.731782108340624*^9}, {
+   3.731782803692135*^9, 3.731782806483613*^9}, 3.731783070814329*^9, {
+   3.731783490338447*^9, 3.7317834926424828`*^9}, {3.731783658932064*^9, 
+   3.731783677124339*^9}, {3.7317838172775593`*^9, 3.7317838179227867`*^9}, {
+   3.7317839834312563`*^9, 3.7317839911594963`*^9}, {3.73178414222514*^9, 
+   3.731784195017624*^9}, {3.731784298954473*^9, 3.731784299234318*^9}}],
+
+Cell[BoxData["\<\"Decomposes a unitary matrix m into the product of two level \
+matrices\"\>"], "Output",
+ CellChangeTimes->{3.73178419689213*^9, 3.731784299513858*^9, 
+  3.731787283512828*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Example", ",", " ", 
+   RowBox[{"random", " ", "unitary", " ", "matrix"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.731787514426208*^9, 3.7317875238337507`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mm", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ".", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", "3", "]"}], "]"}]}], "&"}], "[", 
+    RowBox[{"SingularValueDecomposition", "[", 
+     RowBox[{"RandomComplex", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "1"}], "-", "\[ImaginaryI]"}], ",", 
+         RowBox[{"1", "+", "\[ImaginaryI]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "8"}], "}"}]}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7317842231419697`*^9, 3.731784276225562*^9}, {
+  3.7317859289778852`*^9, 3.731785930961952*^9}, {3.7317860732434597`*^9, 
+  3.731786074331586*^9}, {3.731786209308866*^9, 3.731786213212862*^9}, {
+  3.73178634377425*^9, 3.7317863453901987`*^9}, {3.731787270151504*^9, 
+  3.731787271423366*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"decomp", "=", 
+   RowBox[{"TwoLevelDecompose", "[", "mm", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.731787528138013*^9, 3.731787538849875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Norm", "[", 
+  RowBox[{"mm", "-", 
+   RowBox[{"Dot", "@@", "decomp"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.731787544499814*^9, 3.73178756037794*^9}}],
+
+Cell[BoxData["1.2916295488202758`*^-15"], "Output",
+ CellChangeTimes->{3.731787561309026*^9}]
+}, Open  ]]
+},
+WindowSize->{1600, 1140},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 6116, 153, 722, "Input"],
+Cell[6699, 177, 193, 3, 32, "Output"]
+}, Open  ]],
+Cell[6907, 183, 203, 4, 32, "Input"],
+Cell[7113, 189, 930, 25, 32, "Input"],
+Cell[8046, 216, 184, 4, 32, "Input"],
+Cell[CellGroupData[{
+Cell[8255, 224, 178, 4, 32, "Input"],
+Cell[8436, 230, 93, 1, 34, "Output"]
+}, Open  ]]
+}
+]
+*)
+
